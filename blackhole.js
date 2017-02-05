@@ -34,6 +34,25 @@ class BlackHole extends Game {
 		this.ship.onCollision=function(X) {  }
 		this.ship.rotation[1]=0.15;
 
+		var nose = this.ship.addChild(new Cube());
+		nose.scale=[5,10,10];
+		nose.position=[15,0,0];
+		nose = this.ship.addChild(new Sphere(5,5));
+		nose.scale=10;
+		nose.position=[-20,0,0];
+		nose = this.ship.addChild(new Sphere(5,5));
+		nose.scale=15;
+		nose.position=[-30,0,0];
+
+		var wing = this.ship.addChild(new Cube());
+		wing.scale=[40,10,2];
+		wing.position=[0,15,0];
+		wing.rotation=[0,0,2];
+		wing = this.ship.addChild(new Cube());
+		wing.scale=[40,10,2];
+		wing.position=[0,-15,0];
+		wing.rotation=[0,0,-2];
+
 		this.collisionManager.addCollisionDetection(this.ship);
 		this.collisionManager.addCollisionDetection(this.blackholeCollider);
 	}
@@ -53,7 +72,7 @@ class BlackHole extends Game {
 			this.ship.rotation[0]+=0.2;
 		}
 
-		this.ship.rotation[0]-=this.ship.rotation[0]/30;
+		this.ship.rotation[0]-=this.ship.rotation[0]/20;
 		console.log(this.gravity);
 		this.ship.position[0]-=this.gravity;
 
