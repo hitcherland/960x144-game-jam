@@ -17,8 +17,8 @@ class BlackHole extends Game {
 		this.collisionManager=this.addChild(new Collider());
 
 		this.blackhole = this.addChild(new Sphere(40,40));
-		this.blackhole.scale=[blackholeRadius*2,blackholeRadius*2,blackholeRadius*2];
-		this.blackhole.position=[-canvas.width/2-blackholeRadius*1.5,0,0];
+		this.blackhole.scale=[blackholeRadius*2,blackholeRadius*2,1];
+		this.blackhole.position=[-canvas.width/2-blackholeRadius*1.5,0,20];
 
 		this.blackholeCollider=this.addChild(new GameObject());
 		this.blackholeCollider.position=[-canvas.width/2+blackholeRadius*0.5,0,0]
