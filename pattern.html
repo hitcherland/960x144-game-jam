@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<title>reality pattern</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css"></link>
+		<script src="js/glMatrix-0.9.5.min.js"></script>
+		<script src="js/webgl-utils.js"></script>
+		<script src="js/engine.js"></script>
+		<script src="js/models.js"></script>
+		<script src="pattern.js"></script>
+		<script id="shader-fs" type="x-shader/x-fragment">
+			precision mediump float;
+
+			varying vec3 vLightWeighting;
+
+			void main(void) {
+				gl_FragColor = vec4(vLightWeighting, 0.0);
+			}
+		</script>
+
+		<script id="shader-vs" type="x-shader/x-vertex">
+			attribute vec3 aVertexPosition;
+			attribute vec3 aVertexNormal;
+
+			uniform mat4 uMVMatrix;
+			uniform mat4 uPMatrix;
+			uniform mat3 uNMatrix;
+
+			uniform vec3 uLightingDirection;
+			uniform vec3 uDirectionalColor;
+			uniform vec3 uAmbientLightColor;
+
+			varying vec3 vLightWeighting;
+
+			void main(void) {
+				gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+
+				vec3 transformedNormal = uNMatrix * aVertexNormal;
+				float directionalLightWeighting = max(dot(transformedNormal, uLightingDirection), 0.0);
+				vLightWeighting = uAmbientLightColor+uDirectionalColor * directionalLightWeighting;
+			}
+		</script>
+	</head>
+	<body onload="new Pattern('jam_container')">
+		<canvas width=960 height=144 id='jam_container'>your browser does not support webgl :(</canvas>
+		<!--<video width=960 height=144 id='jam_video' src="vid/jam.mov" type="video/mov" autoplay onended="fadeOut(this,start);"></video>-->
+		<div id='description'>
+			<div>a game created by hitcherland for the <a href="https://itch.io/jam/960144">960x144</a> game jam</div>
+			<div><b>CONTROLS</b><div>SPACE: ADJUST REALITY</div></div>
+			<div>I used <a href="http://learningwebgl.com/blog/?page_id=1217">learning webgl</a> to help me develop the engine that this game uses.</div>
+		</div>
+	</body>
+
+</html>

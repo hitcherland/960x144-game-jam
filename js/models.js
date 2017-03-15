@@ -1,3 +1,77 @@
+class Grid extends Mesh {
+	constructor(width,height,unitLength) {
+		var vertices=[];
+		var triangles=[];
+		var normals=[];
+
+		for (var i = 0; i <= width; i++)
+		{
+				var x = i - width / 2;
+				for (var j = 0; j <= height; j++)
+				{
+						var y = j - height / 2;
+						vertices.push(x*unitLength);
+						vertices.push(y*unitLength);
+						vertices.push(0);
+						normals.push(0);
+						normals.push(0);
+						normals.push(1);
+
+						if (i < width && j < height)
+						{
+								triangles[6 * (i * height + j) + 0] = Math.floor((i + 0) * (height+1) + j + 0);
+								triangles[6 * (i * height + j) + 1] = Math.floor((i + 0) * (height+1) + j + 1);
+								triangles[6 * (i * height + j) + 2] = Math.floor((i + 1) * (height+1) + j + 0);
+								triangles[6 * (i * height + j) + 3] = Math.floor((i + 0) * (height+1) + j + 1);
+								triangles[6 * (i * height + j) + 4] = Math.floor((i + 1) * (height+1) + j + 1);
+								triangles[6 * (i * height + j) + 5] = Math.floor((i + 1) * (height+1) + j + 0);
+
+						}
+				}
+		}
+		super(vertices,triangles,normals);
+	}
+
+	resize(width,height,unitLength) {
+		var vertices=[];
+		var triangles=[];
+		var normals=[];
+
+		for (var i = 0; i <= width; i++)
+		{
+			var x = i - width / 2;
+			for (var j = 0; j <= height; j++)
+			{
+				var y = j - height / 2;
+				vertices.push(x*unitLength);
+				vertices.push(y*unitLength);
+				vertices.push(0);
+				normals.push(0);
+				normals.push(0);
+				normals.push(1);
+
+				if (i < width && j < height)
+				{
+					triangles[6 * (i * height + j) + 0] = Math.floor((i + 0) * (height+1) + j + 0);
+					triangles[6 * (i * height + j) + 1] = Math.floor((i + 0) * (height+1) + j + 1);
+					triangles[6 * (i * height + j) + 2] = Math.floor((i + 1) * (height+1) + j + 0);
+					triangles[6 * (i * height + j) + 3] = Math.floor((i + 0) * (height+1) + j + 1);
+					triangles[6 * (i * height + j) + 4] = Math.floor((i + 1) * (height+1) + j + 1);
+					triangles[6 * (i * height + j) + 5] = Math.floor((i + 1) * (height+1) + j + 0);
+
+				}
+			}
+		}
+
+
+		this.vertices=vertices;
+		this.triangles=triangles;
+		this.normals=normals;
+
+	}
+}
+
+
 class Sphere extends Mesh {
 	constructor(longitudes,latitudes) {
 		var vertices=[];
