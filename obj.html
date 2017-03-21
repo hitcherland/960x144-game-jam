@@ -8,14 +8,14 @@
 		<script src="js/engine.js"></script>
 		<script src="js/models.js"></script>
 		<script src="js/obj.js"></script>
-		<script src="pattern.js"></script>
+		<script src="object_test.js"></script>
 		<script id="shader-fs" type="x-shader/x-fragment">
 			precision mediump float;
 
 			varying vec3 vLightWeighting;
 
 			void main(void) {
-				gl_FragColor = vec4(vLightWeighting, 0.0);
+				gl_FragColor = vec4(vLightWeighting, 1.0);
 			}
 		</script>
 
@@ -43,6 +43,8 @@
 		</script>
 	</head>
 	<body>
+		<body onload="new ObjectTest('jam_container')">
+		<canvas width=960 height=144 id='jam_container'>your browser does not support webgl :(</canvas>
 		<script>
 			Models.load("obj/airboat.obj");
 		</script>

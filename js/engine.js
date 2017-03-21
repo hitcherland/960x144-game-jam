@@ -165,6 +165,7 @@ class Mesh extends GameObject {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
 		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
+
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
