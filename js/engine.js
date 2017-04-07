@@ -165,7 +165,6 @@ class Mesh extends GameObject {
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
 		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
@@ -183,7 +182,6 @@ class Game extends GameObject {
 		this.clearColor=[0,0,0,0];		
 		this.cameraPosition=[0,0,-100];
 		this.ambientLight=[0.05,0.05,0.05];
-		this.directionalLightColor=[1,1,1];
 		this.directionalLightPosition=[1,1,0];
 		this.onStart();
 	}
@@ -225,7 +223,6 @@ class Game extends GameObject {
 		shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 		shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "uNMatrix");
 		shaderProgram.lightingDirectionUniform = gl.getUniformLocation(shaderProgram, "uLightingDirection");
-		shaderProgram.directionalColorUniform = gl.getUniformLocation(shaderProgram, "uDirectionalColor");
 		shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientLightColor");
 	}
 
@@ -233,13 +230,11 @@ class Game extends GameObject {
 		gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-		//mat4.perspective(90, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
 		mat4.ortho(-this.canvas.width/2, this.canvas.width/2, -this.canvas.height/2, this.canvas.height/2, 0.1, 200,pMatrix);
 		mat4.identity(mvMatrix);
 		mat4.translate(mvMatrix, this.cameraPosition);
 		
 		gl.uniform3f(shaderProgram.ambientColorUniform,this.ambientLight[0],this.ambientLight[1],this.ambientLight[2]);
-		gl.uniform3f(shaderProgram.directionalColorUniform,this.directionalLightColor[0],this.directionalLightColor[1],this.directionalLightColor[2]);
 		var adjustedLD = vec3.create();
 		vec3.normalize(this.directionalLightPosition, adjustedLD);
 		vec3.scale(adjustedLD, -1);

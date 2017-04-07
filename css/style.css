@@ -8,6 +8,11 @@ body {
 	position:absolute;
 	width:960px;
 	height:144px;
+	opacity:1;
+}
+
+#jam_container {
+	opacity:0;
 }
 
 #description {
